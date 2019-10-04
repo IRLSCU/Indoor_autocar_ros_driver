@@ -77,7 +77,17 @@ roslaunch TL740D TL740D.launch
 #start rplidar_ros
 roslaunch rplidar_ros rplidar.launch
 ```
+## GetDocumentation
 
+You can use those command update all submodule
+```bash
+git submodule updata --init --recursive
+```
+or update farther submodule
+```bash
+git pull
+git submodule update
+```
 
 ## Contributors 
 
