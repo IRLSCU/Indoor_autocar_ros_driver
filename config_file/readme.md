@@ -2,13 +2,15 @@
 # USB config file
 
 > date: 2019-10-04 11:35:56
+> 
 > author: wangpengcheng
+> 
 > e-email: 67318396@qq.com
 > 
 
 There some config files and bash file for **devices UBS rule on Linux**。Using these config file ,you can **avoid USB device conflicts**。
 
-## How work it
+## Working principle
 
 ### step 1: Query device hardware number
 
