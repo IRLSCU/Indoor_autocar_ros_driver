@@ -1,7 +1,0 @@
-%YAML:1.0
-
-advertise_topic: "/imu_raw"
-tf_tree: "imu_link"
-serial_device: "/dev/ttyUSB0"
-baud_rate: 115200
-rate: 100
