@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="TL740D" type="TL740D_node" name="imu_tl740" output="screen">
+        <param name="/pub_topic_name" type="string" value="/imu_data"/>
+        <param name="/pub_mag_topic_name" type="string" value="/imu_mag"/>
+        <param name="/serial_device" type="string" value="/dev/ttyUSB0"/>
+        <param name="/loop_rate" type="int" value="100"/>
+        <param name="/baud_rate" type="int" value="115200"/>
+    </node>
+    
+	<!--
+	<arg name="rviz_transfer_mp4" default = "$(find transfer_rosbag_mp4)/config/transfer_mp4_inshow.rviz"/>>
+	<node pkg="rviz" type="rviz" name="transfer" args="-d $(find transfer_rosbag_mp4)/config/transfer_mp4_inshow.rviz" />>
+	-->
+</launch>

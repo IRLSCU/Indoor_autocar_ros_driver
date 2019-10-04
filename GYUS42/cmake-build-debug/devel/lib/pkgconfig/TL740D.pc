@@ -1,0 +1,8 @@
+prefix=/home/zhao/Data/AutoD/temp/src/TL740D/cmake-build-debug/devel
+
+Name: TL740D
+Description: Description of TL740D
+Version: 0.0.0
+Cflags: -I/home/zhao/Data/AutoD/temp/src/TL740D/include
+Libs: -L/home/zhao/Data/AutoD/temp/src/TL740D/cmake-build-debug/devel/lib -lTL740D
+Requires: roscpp rospy sensor_msgs std_msgs

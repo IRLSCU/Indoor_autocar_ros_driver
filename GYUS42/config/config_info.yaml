@@ -1,0 +1,7 @@
+%YAML:1.0
+
+advertise_topic: "/ultrasonic_raw"
+tf_tree: "ultrasonic_link"
+serial_device: "/dev/ttyUSB0"
+baud_rate: 9600
+rate: 100
