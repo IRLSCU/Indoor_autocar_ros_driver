@@ -21,6 +21,14 @@ Most folders is named by device. The device driver folder name can be found in t
 - TL740D: IMU device driver source code;You can get more information in the documentation.
 - usb_cam:A ROS Driver for V4L USB Cameras;source code can be found here:[usb_cam](https://github.com/bosch-ros-pkg/usb_cam.git).
 
+## TODO
+
+
+- [ ] Car control driver
+- [ ] Intel Neural Compute Stick2 driver
+- [ ] Binocular camera driver
+
+
 ## Quick start
 
 **Notice: This project is based ROS,YOU MUST INSTALL ROS BEFORE**.You can get more information form here:[Ros](https://www.ros.org/)
@@ -46,6 +54,7 @@ For devices config,you should run `config.sh` in config_file folder.Like this:
 sudo bash ~/catkin_ws/src/config_file/config.sh
 
 ```
+You can install `cutecom` to test those USB devices.
 
 You can get more information from [./config_file/readme.md](./config_file/readme.md);
 
