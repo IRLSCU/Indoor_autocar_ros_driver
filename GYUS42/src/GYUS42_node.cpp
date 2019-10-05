@@ -111,9 +111,17 @@ int main(int argc, char* argv[])
 /*----- with ROS end ------ */
     int fd=1, read_num = 0;
     char buffer[200];
-    memset(buffer, 0,200);
+    memset(buffer,0,200);
    //设置默认USB接口编号
-    char* uartname="/dev/ttyUSB0";
+    char* uartname="/dev/ultrasonic_radar";
+#ifdef USE_ROS
+    if(!USBDevice_.empty()){
+        int len=USBDevice_.size();
+        uartname=(char *)malloc((len+1)*sizeof(char));
+        memset(uartname,0,len+1);
+        strcpy(uartname,USBDevice_.c_str());
+    }
+#endif
 //    if(argc < 2)
 //    {
 //        printf("usage: ./uarttest /dev/ttyUSB0 \n");
@@ -179,7 +187,7 @@ int main(int argc, char* argv[])
             }
         fd=close(fd);
     }
-    free(buffer);
+    free(uartname);
     return 0;
 }
 
