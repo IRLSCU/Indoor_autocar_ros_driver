@@ -91,6 +91,8 @@ git submodule update
 
 ## Contributors 
 
-- [wangpengcheng](https://github.com/wangpengcheng/)
+- [WangPengCheng](https://github.com/wangpengcheng/)
+- [real rui](https://github.com/HuangRui001)
+- [zhaostu4](https://github.com/zhaostu4)
 
 
