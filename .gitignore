@@ -1,0 +1,4 @@
+#This file is to set git project ignore
+#set cmake
+CMakeList.txt
+
