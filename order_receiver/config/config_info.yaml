@@ -1,0 +1,7 @@
+%YAML:1.0
+
+advertise_topic: "/tiny_car_order"
+tf_tree: "tiny_car_order_link"
+serial_device: "/dev/ttyUSB0"
+baud_rate: 115200
+rate: 100
