@@ -4,7 +4,7 @@
 CMakeList.txt
 
 # ros_rslidar
-ros_rslidar/
+#ros_rslidar/
 
 # usb_cam
 #usb_cam/
