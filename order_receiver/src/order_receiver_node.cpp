@@ -6,14 +6,13 @@
 #include <queue>
 #include <boost/asio.hpp>                  //包含boost库函数,串口通信
 #include <boost/bind.hpp>
-#include "std_msgs/UInt8MultiArray.h"
-
+#include "geometry_msgs/QuaternionStamped.h"
 #include "utils.h"
 
 using namespace boost::asio; 
 
-void callback(const std_msgs::UInt8MultiArray::ConstPtr& order);
-std::queue<uint8_t> buf;
+void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order);
+uint8_t order_arr[ORDER_LENGTH];
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "order_receiver_node");       //初始化节点
@@ -25,7 +24,7 @@ int main(int argc, char** argv)
     n.getParam("loop_rate", loop_rate_);
     n.getParam("baud_rate", baud_rate);
 
-    ros::Subscriber order_receiver_sub = n.subscribe<std_msgs::UInt8MultiArray>(pub_topic_name_,1000,callback);
+    ros::Subscriber order_receiver_sub = n.subscribe<geometry_msgs::QuaternionStamped>(pub_topic_name_,1000,callback);
     ros::Rate loop_rate(loop_rate_);
 
     io_service iosev;
@@ -35,36 +34,26 @@ int main(int argc, char** argv)
     sp.set_option(serial_port::parity());
     sp.set_option(serial_port::stop_bits());
     sp.set_option(serial_port::character_size(8));
+
+    order_arr[0]=0xFF;
+    order_arr[1]=0xFE;
     while (ros::ok())
     {
-        uint8_t order[ORDER_LENGTH];  
-        if(buf.size()==ORDER_LENGTH){
-            std::stringstream ss;
-            ss<<"order_receiver_info:";
-            for(int i=0;i<ORDER_LENGTH;i++){
-                uint8_t num = buf.front();
-                ss<<" "<<(int)num;
-                order[i]=num;
-                buf.pop();
-            }
-            ROS_INFO_STREAM(ss.str());
-            if(order[0]==0xFF&&order[1]==0xFE){//头部校验
-                size_t  data_len;       
-                data_len = write( sp, buffer(order));
-            }
-        }else if(buf.size()!=0){
-            ROS_INFO_STREAM("[Error]order_receiver_node----------->the data format error,size is buf.size()");
-        }
-        
+        int data_len = write( sp, buffer(order_arr));
         ros::spinOnce();
         loop_rate.sleep();
     }
     return 0;
 }
-void callback(const std_msgs::UInt8MultiArray::ConstPtr& order){
+void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order){
     int i=0;
-    for(int i=0;i<order->data.size();i++){
-        buf.push(order->data[i]);
-    }
+    int leftOrientation=order->quaternion.w;
+    int rightOrientation=order->quaternion.y;
+    int leftSpeed=order->quaternion.y;
+    int rightSpeed=order->quaternion.z;
+    order_arr[3]=leftSpeed;
+    order_arr[2]=rightSpeed;
+    order_arr[5]=leftOrientation;
+    order_arr[4]=rightOrientation;
     return;
 }
