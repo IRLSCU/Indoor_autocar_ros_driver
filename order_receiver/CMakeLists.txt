@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   sensor_msgs
   std_msgs
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -108,7 +109,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES order_receiver
-  CATKIN_DEPENDS roscpp rospy sensor_msgs std_msgs
+  CATKIN_DEPENDS roscpp rospy sensor_msgs std_msgs geometry_msgs
 #  DEPENDS system_lib
 )
 
