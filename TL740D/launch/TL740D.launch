@@ -2,7 +2,7 @@
     <node pkg="TL740D" type="TL740D_node" name="imu_tl740" output="screen">
         <param name="/pub_topic_name" type="string" value="/imu_data"/>
         <param name="/pub_mag_topic_name" type="string" value="/imu_mag"/>
-        <param name="/serial_device" type="string" value="/dev/ttyUSB0"/>
+        <param name="/serial_device" type="string" value="/dev/imu"/>
         <param name="/loop_rate" type="int" value="100"/>
         <param name="/baud_rate" type="int" value="115200"/>
     </node>

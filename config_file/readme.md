@@ -202,3 +202,39 @@ Notce:
 **Here, the configuration according to the device chip class is unique. One rule can only be configured in the device. When the two devices are the same device, the device chip cannot be distinguished.**
 
 You can get more information form here: [https://wangpengcheng.github.io/2019/09/18/change_usb_rules_ubuntu/](https://wangpengcheng.github.io/2019/09/18/change_usb_rules_ubuntu/)
+
+
+# Set frp
+
+we use frp to get ssh function in public network;You should install frp to your computer and set it self start
+
+## Step 1: Install frp Service and client
+You can get information form next link:
+
+- [处于不同局域网下的Socket通信——frp配置](https://blog.csdn.net/m0_37817028/article/details/89468704)
+- [frp help](https://github.com/fatedier/frp/)
+
+## Step 2: Change the config file
+
+set the config file `frpc.ini`
+you should chang your serivce ip address and port number
+
+change the `frp.conf` file. Set frpc path to youself. 
+```
+command =/home/nvidia/frp/frpc -c /home/nvidia/frp/frpc.ini
+```
+
+## Step 3: Auto setup
+
+you can run the `config.sh` to auto config it.
+
+You can set it yourself
+
+```shell
+sudo apt-get -y install supervisor
+sudo cp ./frp.conf /etc/supervisor/conf.d/frp.conf
+# 重启supervisor
+sudo systemctl restart supervisor
+#重启frp服务
+sudo supervisorctl restart frp
+```
