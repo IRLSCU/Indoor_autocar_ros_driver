@@ -48,6 +48,7 @@ using namespace std;
 
 #endif //ros
 int set_opt(int,int,int,char,int);
+std::string string_to_hex(const std::string& input);
 int open_port(char* uartname)
 {
     int fd = open(uartname, O_RDWR|O_NONBLOCK);
@@ -110,8 +111,8 @@ int main(int argc, char* argv[])
 #endif
 /*----- with ROS end ------ */
     int fd=1, read_num = 0;
-    char buffer[200];
-    memset(buffer,0,200);
+    unsigned char buffer[30];
+    memset(buffer,0,30);
    //设置默认USB接口编号
     char* uartname="/dev/ultrasonic_radar";
 #ifdef USE_ROS
@@ -147,20 +148,29 @@ int main(int argc, char* argv[])
                     // {
                     //     return 0;
                     // }
-                    
-                    //睡眠一定时间，等待数据写入，时间间隔为200ms,0.2s
-                    usleep(500000);
-                    memset(buffer, 0, 200);
-                    read_num = read(fd, buffer, 100);
 #ifdef USE_ROS
-                    ROS_DEBUG_STREAM("sbuff: "<<std::string(buffer));
+                    loop_rate.sleep();
+                    //睡眠一定时间，等待数据写入，时间间隔为000ms,0.5s
+#else
+                    usleep(500000);
+#endif
+                    memset(buffer, 0, 30);
+                    read_num = read(fd, buffer, 30);
+#ifdef USE_ROS
+                    // string temp_str(&buffer[0],&buffer[34]);
+                    // string sbuff = string_to_hex(temp_str);
+                    // string::size_type position = temp_str.find("45");
 #else
                     printf("read_num=%d \n",read_num);
 #endif
                     if(read_num>0){
                         if(buffer[2]==is_distance){
-                            int destance=0;
-                            destance=(buffer[4]<<8)|buffer[5];
+                            unsigned long distance=0;
+                            distance=(buffer[4]<<8)|buffer[5];
+                        if(distance<=0){
+                            printf("error ultrasonic distance: %ld (cm) \n",distance);
+                            continue;
+                        }
 #ifdef USE_ROS
                     //ROS_DEBUG_STREAM("ultrasonic distance:"<<std::to_string(distance));                           
                     std_msgs::Header ultrasonic_data;
@@ -168,11 +178,10 @@ int main(int argc, char* argv[])
                     ultrasonic_data.frame_id="GYUS42";
                     //ultrasonic_data.header.stamp=ros::Time::now();
                     //ultrasonic_data.header.frame_id = "GYUS42";
-                    ultrasonic_data.seq=destance;
+                    ultrasonic_data.seq=distance;
                     ultrasonic_pub.publish(ultrasonic_data);
-                    printf("ultrasonic distance: %d (cm) \n",destance);
+                    printf("ultrasonic distance: %ld (cm) \n",distance);
                     ros::spinOnce();
-                    //loop_rate.sleep();
 #else
                     
 #endif
@@ -278,3 +287,17 @@ int set_opt(int fd,int nSpeed, int nBits, char nEvent, int nStop)
     return 0;
 }
 
+std::string string_to_hex(const std::string& input)
+{
+    static const char* const lut = "0123456789ABCDEF";
+    size_t len = input.length();
+    std::string output;
+    output.reserve(2 * len);
+    for (size_t i = 0; i < len; ++i)
+    {
+        const unsigned char c = input[i];
+        output.push_back(lut[c >> 4]);
+        output.push_back(lut[c & 15]);
+    }
+    return output;
+}
