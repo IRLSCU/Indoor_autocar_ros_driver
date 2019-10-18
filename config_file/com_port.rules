@@ -1,8 +1,8 @@
 # ultrasonic_radar usb rules
-KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="ultrasonic_radar"
+# KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{bcdDevice}=="0254" GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="ultrasonic_radar"
 # imu usb rules
-KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="imu"
+KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{bcdDevice}=="0600" GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="imu"
 # tiny_car usb rules
-KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="14cd", ATTRS{idProduct}=="8601", GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="tiny_car"
+KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="14cd", ATTRS{idProduct}=="8601", ATTRS{bcdDevice}=="0254" GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="tiny_car"
 # single line lidar rules
-KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="single_line_lidar"
+KERNEL=="ttyUSB*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{bcdDevice}=="0100" GROUP="users", MODE="0666", ENV{ID_MM_DEVICE_IGNORE}="1", SYMLINK+="single_line_lidar"
