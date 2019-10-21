@@ -47,8 +47,8 @@ int main(int argc, char** argv)
 }
 void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order){
     int i=0;
-    int leftOrientation=order->quaternion.w;
-    int rightOrientation=order->quaternion.y;
+    int leftOrientation=order->quaternion.x;
+    int rightOrientation=order->quaternion.w;
     int leftSpeed=order->quaternion.y;
     int rightSpeed=order->quaternion.z;
     order_arr[3]=leftSpeed;
