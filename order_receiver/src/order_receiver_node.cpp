@@ -46,6 +46,9 @@ int main(int argc, char** argv)
     return 0;
 }
 void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order){
+    ROS_WARN_STREAM("send stamp :"+std::to_string(order->header.stamp.toSec()));
+    ROS_WARN_STREAM("cur stamp :"+std::to_string(ros::Time::now().toSec()));
+    ROS_WARN_STREAM("diff betweent cur stamp and send stamp :"+std::to_string(ros::Time::now().toSec()-order->header.stamp.toSec()));
     int i=0;
     int leftOrientation=order->quaternion.x;
     int rightOrientation=order->quaternion.w;
