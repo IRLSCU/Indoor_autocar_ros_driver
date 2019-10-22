@@ -8,6 +8,19 @@
 #include <boost/bind.hpp>
 #include "geometry_msgs/QuaternionStamped.h"
 #include "utils.h"
+#include <sys/time.h>
+#include <unistd.h>
+ 
+void sysTime(long k)
+{
+    struct timeval tv;
+    struct timezone tz;   
+    struct tm *t;
+     
+    gettimeofday(&tv, &tz);
+    t = localtime(&tv.tv_sec);
+    printf("number: %ld \t time_now:%d-%d-%d %d:%d:%d.%ld \n",k, 1900+t->tm_year, 1+t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, tv.tv_usec);
+}
 
 using namespace boost::asio; 
 
@@ -43,14 +56,20 @@ int main(int argc, char** argv)
         ros::spinOnce();
         loop_rate.sleep();
     }
+    //邓店处理队伍完成和继续下一步
+    iosev.run();
     return 0;
 }
 void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order){
-    ROS_WARN_STREAM("send stamp :"+std::to_string(order->header.stamp.toSec()));
-    ROS_WARN_STREAM("cur stamp :"+std::to_string(ros::Time::now().toSec()));
-    ROS_WARN_STREAM("diff betweent cur stamp and send stamp :"+std::to_string(ros::Time::now().toSec()-order->header.stamp.toSec()));
+    //ROS_WARN_STREAM("send stamp :"+std::to_string(order->header.stamp.toSec()));
+    //ROS_WARN_STREAM("cur stamp :"+std::to_string(ros::Time::now().toSec()));
+    //ROS_WARN_STREAM("diff betweent cur stamp and send stamp :"+std::to_string(ros::Time::now().toSec()-order->header.stamp.toSec()));
+    
     int i=0;
-    int leftOrientation=order->quaternion.x;
+    long leftOrientation=order->quaternion.x;
+    if(leftOrientation%200==0){
+	sysTime(leftOrientation);
+    }
     int rightOrientation=order->quaternion.w;
     int leftSpeed=order->quaternion.y;
     int rightSpeed=order->quaternion.z;
