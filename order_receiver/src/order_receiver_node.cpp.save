@@ -65,7 +65,11 @@ void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order){
     //ROS_WARN_STREAM("cur stamp :"+std::to_string(ros::Time::now().toSec()));
     //ROS_WARN_STREAM("diff betweent cur stamp and send stamp :"+std::to_string(ros::Time::now().toSec()-order->header.stamp.toSec()));
     
-    int leftOrientation=order->quaternion.x;
+    
+    rnion.x;
+    if(leftOrientation%200==0){
+	sysTime(leftOrientation);
+    }
     int rightOrientation=order->quaternion.w;
     int leftSpeed=order->quaternion.y;
     int rightSpeed=order->quaternion.z;
