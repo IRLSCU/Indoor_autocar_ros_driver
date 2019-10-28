@@ -1,4 +1,4 @@
-#define ORDER_LENGTH 10
+
 #include <string>
 #include <ros/ros.h>                           // 包含ROS的头文件
 #include <ros/console.h>                        // ROS log
@@ -9,6 +9,7 @@
 #include "geometry_msgs/QuaternionStamped.h"
 #include "utils.h"
 
+#define ORDER_LENGTH 10
 using namespace boost::asio; 
 
 void callback(const geometry_msgs::QuaternionStamped::ConstPtr& order);
