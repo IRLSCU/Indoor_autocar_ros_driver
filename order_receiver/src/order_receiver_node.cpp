@@ -37,10 +37,14 @@ int main(int argc, char** argv)
     n.getParam("serial_device", USBDevice_);
     n.getParam("loop_rate", loop_rate_);
     n.getParam("baud_rate", baud_rate);
-
     ros::Subscriber order_receiver_sub = n.subscribe<geometry_msgs::QuaternionStamped>(pub_topic_name_,1000,callback);
     ros::Rate loop_rate(loop_rate_);
-
+    /* check file */
+   
+    int isFileExit=MyCheckFile(USBDevice_.c_str());
+    if(isFileExit!=0){
+        return 0;
+    }
     io_service iosev;
     serial_port sp(iosev, USBDevice_);         //定义传输的串口
     sp.set_option(serial_port::baud_rate(baud_rate));

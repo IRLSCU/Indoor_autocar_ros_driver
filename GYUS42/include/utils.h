@@ -11,7 +11,13 @@
 #include <sstream>
 #include <iostream>
 #include <queue>
-
+#include <unistd.h>
+enum FILE_ERROE 
+{
+    NO_EXIST=1,
+    NO_READ_PERMISSION=2,
+    NO_WRITE_PERMISSION=3,
+};
 using namespace std;
 
 template <typename T>
@@ -28,4 +34,23 @@ T readParam(ros::NodeHandle &n, std::string name)
     return ans;
 }
 
+int MyCheckFile(const char* file_name){
+    if((access(file_name,F_OK))==-1)   
+    {   
+        printf(" File %s  is not exit,please check again.\n",file_name);
+        return FILE_ERROE::NO_EXIST;
+    }
+    if(access(file_name,R_OK)==-1)   
+    {   
+        printf("User not have File %s  Read Permission,please check again.\n",file_name);
+        return FILE_ERROE::NO_READ_PERMISSION;
+    }
+  
+    if(access(file_name,W_OK)==-1)   
+    {   
+        printf("User not have File %s  Write Permission,please check again.\n",file_name);
+        return FILE_ERROE::NO_WRITE_PERMISSION;
+    }   
+    return 0;
+}
 #endif // GYUS42_UTILS_H

@@ -1,6 +1,6 @@
 /****************************************************************************
-** @projectName   
-** Version    
+** @projectName
+** Version
 ** This file is part of the  project.
 ** @file          .cpp
 ** @brief         GYUS42 串口通信
@@ -8,7 +8,7 @@
 ** @author        wangpengcheng
 ** @QQ            673018396
 ** @email         wangpengcheng2018@gmail.com
-** @address       
+** @address
 ** @date          2019-10-3 周三  17:06:21
 ** @example
 **
@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
     ros::Publisher ultrasonic_pub = n.advertise<std_msgs::Header>(pub_topic_name_, 10);
     ros::Rate loop_rate(loop_rate_);
 /*
-    
+
     io_service iosev;
     serial_port sp(iosev, USBDevice_);         //定义传输的串口
     sp.set_option(serial_port::baud_rate(baud_rate));
@@ -123,11 +123,12 @@ int main(int argc, char* argv[])
         strcpy(uartname,USBDevice_.c_str());
     }
 #endif
-//    if(argc < 2)
-//    {
-//        printf("usage: ./uarttest /dev/ttyUSB0 \n");
-//        return 0;
-//    }
+    /* check file  */
+    int isFileExit=MyCheckFile(uartname);
+    if(isFileExit!=0){
+        return 0;
+
+    }
     if((fd=open_port(uartname))<0)
     {
          printf("open %s is failed\n",uartname);
@@ -172,7 +173,7 @@ int main(int argc, char* argv[])
                             continue;
                         }
 #ifdef USE_ROS
-                    //ROS_DEBUG_STREAM("ultrasonic distance:"<<std::to_string(distance));                           
+                    //ROS_DEBUG_STREAM("ultrasonic distance:"<<std::to_string(distance));
                     std_msgs::Header ultrasonic_data;
                     ultrasonic_data.stamp=ros::Time::now();
                     ultrasonic_data.frame_id="GYUS42";
@@ -183,7 +184,7 @@ int main(int argc, char* argv[])
                     printf("ultrasonic distance: %ld (cm) \n",distance);
                     ros::spinOnce();
 #else
-                    
+
 #endif
                         }
                     }else{
