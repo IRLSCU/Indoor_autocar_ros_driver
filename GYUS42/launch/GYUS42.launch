@@ -2,7 +2,11 @@
     <node pkg="GYUS42" type="GYUS42_node" name="ultrasonic_gyus42" output="screen">
         <param name="/pub_topic_name" type="string" value="/ultrasonic_data"/>
         <param name="/pub_mag_topic_name" type="string" value="/ultrasonic_mag"/>
+<<<<<<< HEAD
         <param name="/serial_device" type="string" value="/dev/ttyUSB2"/>
+=======
+        <param name="/serial_device" type="string" value="/dev/ttyTHS2"/>
+>>>>>>> 82047c7a0e0c4e4f77b94b3ff7d70d7cbbddd36f
         <param name="/loop_rate" type="int" value="10"/>
         <param name="/baud_rate" type="int" value="9600"/>
     </node>
