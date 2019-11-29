@@ -1,0 +1,10 @@
+<launch>
+    <node pkg="wheel_speed" type="wheel_speed_node" name="wheel_speed" output="screen">
+        <param name="/pub_topic_name" type="string" value="/wheel_speed"/>
+        <!-- <param name="/serial_device" type="string" value="/dev/ttyUSB0"/> -->
+        <param name="/serial_device" type="string" value="/dev/tiny_car"/>
+        <param name="/loop_rate" type="int" value="100"/>
+        <param name="/baud_rate" type="int" value="115200"/>
+        <param name="/wheel_radius" type="double" value="10.85"/>
+    </node>
+</launch>

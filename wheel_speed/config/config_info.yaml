@@ -1,0 +1,8 @@
+%YAML:1.0
+
+advertise_topic: "/wheel_speed"
+tf_tree: "wheel_speed_link"
+serial_device: "/dev/ttyUSB0"
+radius: 108.5
+baud_rate: 115200
+rate: 100
