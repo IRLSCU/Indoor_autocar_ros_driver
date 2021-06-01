@@ -2,3 +2,9 @@
 	path = Documentation
 	url = https://github.com/IRLSCU/documentation_for_devices.git
 
+[submodule "MYNT-EYE-S-SDK"]
+	path = MYNT-EYE-S-SDK
+	url = https://github.com/slightech/MYNT-EYE-S-SDK
+[submodule "MYNT-EYE-S-SDK.git"]
+	path = MYNT-EYE-S-SDK.git
+	url = https://github.com/slightech/MYNT-EYE-S-SDK
