@@ -44,6 +44,9 @@ you can clone this project in your ROS workspace. clone it and build it by `catk
 cd ~/catkin_ws
 cd src/
 git clone https://github.com/wangpengcheng/Indoor_autocar_ros_driver.git
+# or get submodule
+git clone --recurse-submodules https://github.com/wangpengcheng/Indoor_autocar_ros_driver.git
+
 cd ..
 catkin_make
 
@@ -80,7 +83,7 @@ roslaunch TL740D TL740D.launch
 #start rplidar_ros
 roslaunch rplidar_ros rplidar.launch
 ```
-## GetDocumentation
+## GetDocumentation And Submodule
 
 You can use those command update all submodule
 ```bash
