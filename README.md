@@ -27,9 +27,9 @@ Most folders is named by device. The device driver folder name can be found in t
 ## TODO
 
 
-- [ ] Car control driver
+- [*] Car control driver
 - [ ] Intel Neural Compute Stick2 driver
-- [ ] Binocular camera driver
+- [*] Binocular camera driver
 
 
 ## Quick start
